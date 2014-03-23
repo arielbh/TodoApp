@@ -26,8 +26,20 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
-            <ListBox ItemsSource="{Binding}"/>
+            <phone:LongListSelector ItemsSource="{Binding}">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Text="{Binding Title, Mode=TwoWay}" />
+                            <CheckBox IsChecked="{Binding IsComplete, Mode=TwoWay}" Grid.Column="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
             <TextBlock x:Name="NoItemsText" Text="No Items, perhaps create a new todo?"/>
             
             <Button Content="Add" Click="ButtonBase_OnClick" Grid.Row="1"/>
