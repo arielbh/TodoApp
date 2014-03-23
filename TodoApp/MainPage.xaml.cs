@@ -15,25 +15,29 @@ namespace TodoApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private ObservableCollection<Todo> _todo = new ObservableCollection<Todo>();
+        
         // Constructor
         public MainPage()
         {
             InitializeComponent();
-            _todo.CollectionChanged += _todo_CollectionChanged;
-            DataContext = _todo;
+            TodoService.Todos.CollectionChanged += _todo_CollectionChanged;
+            DataContext = TodoService.Todos;
 
         }
 
         void _todo_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            NoItemsText.Visibility = (_todo.Count> 0)? Visibility.Collapsed : Visibility.Visible;
+            NoItemsText.Visibility = (TodoService.Todos.Count > 0) ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            _todo.Add(new Todo { Id = 1, Title = "fff"});
-            
+            TodoService.Todos.Add(new Todo { Id = TodoService.Todos.Count + 1 });
+        }
+
+        private void GoToCompletedClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/CompletedPage.xaml", UriKind.Relative));
         }
     }
 }
