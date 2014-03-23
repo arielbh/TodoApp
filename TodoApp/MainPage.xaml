@@ -22,6 +22,15 @@
             <TextBlock Text="Menu" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <ListBox ItemsSource="{Binding}"/>
+            <TextBlock x:Name="NoItemsText" Text="No Items, perhaps create a new todo?"/>
+            
+            <Button Content="Add" Click="ButtonBase_OnClick" Grid.Row="1"/>
 
         </Grid>
     </Grid>
